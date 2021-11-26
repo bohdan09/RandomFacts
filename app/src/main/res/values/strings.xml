@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RandomFacts</string>
+    <string name="get_fact">Get fact</string>
+    <string name="get_random_fact">Get fact about random fact</string>
+    <string name="hint">Enter you number</string>
+    <string name="isEmpty">Please enter a number</string>
 </resources>
