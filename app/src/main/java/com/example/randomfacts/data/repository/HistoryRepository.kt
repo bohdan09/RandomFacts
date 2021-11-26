@@ -7,7 +7,7 @@ import com.example.randomfacts.domain.model.NumbersFact
 class HistoryRepository(
     private val localDataSource: LocalDataSource
 ) {
-    fun getFactByNumber(number: Int): LiveData<NumbersFact> {
+    fun getFactByNumber(number: Int): NumbersFact {
         return localDataSource.getFactByNumber(number = number)
     }
 

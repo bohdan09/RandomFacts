@@ -1,6 +1,5 @@
 package com.example.randomfacts.data.api
 
-import com.example.randomfacts.data.data.source.remote.RemoteDataSource
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

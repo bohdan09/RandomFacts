@@ -5,9 +5,9 @@ import com.example.randomfacts.data.repository.NumberFactRepository
 import retrofit2.Call
 
 class GetFactByRandomNumberUseCase(
-   private val numberFactRepository: NumberFactRepository
+    private val numberFactRepository: NumberFactRepository
 ) {
-    fun execute() : Call<NumbersFact> {
+    fun execute(): Call<NumbersFact> {
         return numberFactRepository.getRandomFactByRandomNumber()
     }
 }

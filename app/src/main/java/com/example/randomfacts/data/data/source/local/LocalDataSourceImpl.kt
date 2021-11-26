@@ -8,7 +8,7 @@ import com.example.randomfacts.domain.model.NumbersFact
 class LocalDataSourceImpl(
     val historyFactsDao: HistoryFactsDao
 ) : LocalDataSource {
-    override fun getFactByNumber(number: Int): LiveData<NumbersFact> {
+    override fun getFactByNumber(number: Int): NumbersFact {
         return historyFactsDao.getHistoryRecordByNumber(number = number)
     }
 

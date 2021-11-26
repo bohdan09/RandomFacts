@@ -1,7 +1,6 @@
 package com.example.randomfacts.di.module
 
 import android.app.Application
-import com.example.randomfacts.data.data.source.local.LocalDataSource
 import com.example.randomfacts.data.data.source.local.LocalDataSourceImpl
 import com.example.randomfacts.data.repository.HistoryRepository
 import com.example.randomfacts.data.room.AppDB
@@ -27,7 +26,7 @@ class RoomModule(private val application: Application) {
     fun provideLocalDataSourceImpl(
         factsDao: HistoryFactsDao
     ): LocalDataSourceImpl {
-        return LocalDataSourceImpl( factsDao)
+        return LocalDataSourceImpl(factsDao)
     }
 
     @Provides

@@ -12,13 +12,14 @@ abstract class AppDB : RoomDatabase() {
 
     companion object {
         const val TABLE_NAME = "historyTable"
-        private const val DB_NAME = "appDBp"
+        private const val DB_NAME = "appDBpj"
         private var instance: AppDB? = null
 
         fun getAppDBInstance(application: Application): AppDB {
             if (instance == null) {
-                instance = Room.databaseBuilder(application.applicationContext, AppDB::class.java, DB_NAME)
-                    .build()
+                instance =
+                    Room.databaseBuilder(application.applicationContext, AppDB::class.java, DB_NAME)
+                        .build()
             }
             return instance!!
         }

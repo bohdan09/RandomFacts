@@ -41,8 +41,9 @@ class MyAdapter(val onItemClickListener: OnItemClickListener) :
 
     fun setFactsList(list: List<NumbersFact>) {
         factsList = list
-        notifyDataSetChanged()
     }
+
+    fun getFactsList(): List<NumbersFact> = factsList
 
     interface OnItemClickListener {
         fun onItemClick(number: Int)
