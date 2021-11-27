@@ -11,9 +11,8 @@ import com.example.randomfacts.ui.adapter.DiffUtilCallBack
 import com.example.randomfacts.ui.adapter.MyAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.awaitResponse
+import java.lang.Exception
 import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor(
@@ -33,32 +32,34 @@ class MainActivityViewModel @Inject constructor(
     val errors: LiveData<String> = _errors
 
     fun getFactByRandomNumber() {
-        getFactByRandomNumberUseCase.execute().enqueue(object : Callback<NumbersFact> {
-            override fun onResponse(call: Call<NumbersFact>, response: Response<NumbersFact>) {
-                val numberFact = response.body()
-                insertNumberFactToDb(numberFact)
-                getAllHistory()
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = getFactByRandomNumberUseCase.execute().awaitResponse()
+                if (response.isSuccessful) {
+                    val numberFact = response.body()
+                    insertNumberFactToDb(numberFact)
+                    getAllHistory()
+                }
+            } catch (e: Exception) {
+                _errors.postValue(e.message)
             }
 
-            override fun onFailure(call: Call<NumbersFact>, t: Throwable) {
-                _errors.value = t.message
-            }
-        })
+        }
     }
 
     fun getFactByUserNumber(number: Int) {
-        getFactByUserNumberUseCase.execute(number = number).enqueue(object : Callback<NumbersFact> {
-            override fun onResponse(call: Call<NumbersFact>, response: Response<NumbersFact>) {
-                val numberFact = response.body()
-                insertNumberFactToDb(numberFact)
-                getAllHistory()
-
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = getFactByUserNumberUseCase.execute(number = number).awaitResponse()
+                if (response.isSuccessful) {
+                    val numberFact = response.body()
+                    insertNumberFactToDb(numberFact)
+                    getAllHistory()
+                }
+            } catch (e: Exception) {
+                _errors.postValue(e.message)
             }
-
-            override fun onFailure(call: Call<NumbersFact>, t: Throwable) {
-                _errors.value = t.message
-            }
-        })
+        }
     }
 
     private fun insertNumberFactToDb(numberFact: NumbersFact?) {
